@@ -28,17 +28,6 @@ export function parseFilterLevels(cfg: Defaults): Defaults {
 // ----- FILTERING CONDITIONS ----- //
 
 /**
- * Validate that the current level set on the log is allowed based on
- * the filter rules.
- */
-export function levelAllowed(data: FinalLogData<any>): boolean {
-  return filterAllowed(data.cfg, 'level', (filter, func) => {
-    const source = data.cfg.filters?.level?.[filter] ?? ([] as number[]);
-    return func<number>(source, data.level);
-  });
-}
-
-/**
  * Validate that the current label set on the log is allowed based on
  * the filter rules.
  */
@@ -82,6 +71,17 @@ export function namespaceAllowed(data: FinalLogData<any>): boolean {
 }
 
 /**
+ * Validate that the current level set on the log is allowed based on
+ * the filter rules.
+ */
+export function levelAllowed(data: FinalLogData<any>): boolean {
+  const { include = [], exclude = [] } = data.cfg?.filters?.level ?? {};
+  return include.length > 0 // if both `include` and `exclude` are set, `include` takes precedence
+    ? include.indexOf(data.level) !== -1
+    : exclude?.length > 0 && exclude?.indexOf(data.level) === -1;
+}
+
+/**
  * Wrapper around the filter methods to handle some basic setup for validating
  * the filter values.
  */
@@ -89,7 +89,7 @@ function filterAllowed(cfg: Defaults, category: GlobalFilter, cb: FilterAllowedC
   const filter_type = filterType(cfg, category);
   if (filter_type) {
     const [filter, func] = filter_type;
-    const result = cb(filter, func);
+    const result = cb(filter, func); // filter = 'include' | 'exclude';
     if (result !== undefined) {
       return result;
     }
@@ -113,13 +113,6 @@ function filterType(
 }
 
 /**
- * Is the log in the included filter?
- */
-function isIncluded<T>(source: T[], value: T): boolean {
-  return source.length > 0 && source.indexOf(value) !== -1;
-}
-
-/**
  * Is the log not in the excluded filter?
  */
 function isNotExcluded<T>(source: T[], value: T): boolean {
@@ -132,4 +125,11 @@ function isNotExcluded<T>(source: T[], value: T): boolean {
 function filterIsSet(cfg: Defaults, type: 'include' | 'exclude', filter: GlobalFilter): boolean {
   const include_prop = cfg?.filters?.[filter]?.[type] ?? [];
   return include_prop.length > 0;
+}
+
+/**
+ * Is the log in the included filter?
+ */
+function isIncluded<T>(source: T[], value: T): boolean {
+  return source.length > 0 && source.indexOf(value) !== -1;
 }
