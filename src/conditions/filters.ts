@@ -76,9 +76,9 @@ export function namespaceAllowed(data: FinalLogData<any>): boolean {
  */
 export function levelAllowed(data: FinalLogData<any>): boolean {
   const { include = [], exclude = [] } = data.cfg?.filters?.level ?? {};
-  return include.length > 0 // if both `include` and `exclude` are set, `include` takes precedence
-    ? include.indexOf(data.level) !== -1
-    : exclude?.length > 0 && exclude?.indexOf(data.level) === -1;
+  if (include.length > 0) return include.indexOf(data.level) !== -1;
+  if (exclude?.indexOf(data.level) === -1) return true;
+  return global.$shed?.getConfig().shouldUseStrictExclude ? false : data.isOutstand;
 }
 
 /**

@@ -135,6 +135,10 @@ export class Shed {
     this.cfg = this.formatConfig(cfg);
   }
 
+  public getConfig(): ShedUserConfig {
+    return this.cfg;
+  }
+
   /**
    * Takes a Shed and formats it to merge shed defaults and
    * global config overrides with defaults. It also pre-parses any level

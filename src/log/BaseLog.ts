@@ -129,6 +129,11 @@ export class BaseLog<C extends Constraints> {
   private expression: boolean | undefined;
 
   /**
+   * Flag which tells the log instance to ignore global filter.
+   */
+  private isOutstand = false;
+
+  /**
    * Flag which tells the log instance to skip rendering.
    */
   private isSilent = false;
@@ -531,6 +536,18 @@ export class BaseLog<C extends Constraints> {
   }
 
   /**
+   * This modifier method makes the log ignore the global filter.
+   * eg.,
+   * if global filter out warn level logs, for the loggers who adopt this modifier with using warn method
+   * will still eligible to be printed.
+   */
+  public get standout(): this {
+    return this.modifier((ctxt) => {
+      ctxt.isOutstand = true;
+    });
+  }
+
+  /**
    * This modifier method allows the log to execute normally but
    * prevent it from printing to the console.
    */
@@ -697,7 +714,7 @@ export class BaseLog<C extends Constraints> {
   /*
     ! console.timeLog() is purposefully omitted from this API.
 
-    timeLog() is a useless method within the Adze API. The same effect can be 
+    timeLog() is a useless method within the Adze API. The same effect can be
     accomplished by created a new log with the same label.
   */
 
@@ -883,6 +900,7 @@ export class BaseLog<C extends Constraints> {
       expression: this.expression,
       dumpContext: this.dumpContext,
       isSilent: this.isSilent,
+      isOutstand: this.isOutstand,
       printed: this.printed,
       showTimestamp: this.showTimestamp,
       timeNow: this.timeNowVal,
@@ -908,6 +926,7 @@ export class BaseLog<C extends Constraints> {
     this.assertion = data.assertion;
     this.expression = data.expression;
     this.dumpContext = data.dumpContext;
+    this.isOutstand = data.isOutstand;
     this.isSilent = data.isSilent;
     this.printed = data.printed;
     this.showTimestamp = data.showTimestamp;

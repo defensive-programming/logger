@@ -18,6 +18,7 @@ export type ListenerCallback = (
 
 export interface ShedConfig {
   cacheLimit: number;
+  shouldUseStrictExclude: boolean;
   globalCfg: Defaults | null;
 }
 

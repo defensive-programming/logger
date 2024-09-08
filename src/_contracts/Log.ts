@@ -72,6 +72,7 @@ export interface LogData<C extends Constraints> {
   definition: LogLevelDefinition | null;
   showTimestamp: boolean;
   dumpContext: boolean;
+  isOutstand: boolean;
   expression?: boolean;
   isSilent: boolean;
   printed: boolean;
