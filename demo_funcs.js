@@ -1,5 +1,7 @@
 // Run our demo modules
-export default function runDemo(lib, el) {
+export default function runDemo(lib, el)
+{
+  standout(lib);
   screenshots(lib, el);
   // screenshotDemo(lib);
   defaultLevels(lib);
@@ -30,6 +32,21 @@ export default function runDemo(lib, el) {
   labelIncludeFilter(lib);
   labelExcludeFilter(lib);
   machineReadableLogs(lib);
+}
+function standout({ adze, createShed })
+{
+  console.log('\n----- Standout Log -----\n');
+  const shed = createShed({
+    shouldUseStrictExclude: true,
+    globalCfg: {
+      filters: {
+        level: {
+          exclude: [7] // stop to show certain logs on certain levels
+        }
+      }
+    }
+  });
+  adze().standout.debug('The standout log still can be printed if `shouldUseStrictExclude` is set to false.');
 }
 
 function screenshots({ adze, createShed }, el) { }
