@@ -5,7 +5,7 @@ declare global {
   interface globalThis {
     $shed?: Shed;
     ADZE_ENV?: 'test' | 'dev';
-    ADZE_ENV_CONTEXT?: 'globalThis' | 'window';
+    ADZE_ENV_CONTEXT?: 'globalThis';
   }
 }
 

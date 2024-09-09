@@ -6,7 +6,7 @@ import adze, { defaults } from '../../src';
 // Simulate the browser environment for testing
 browserEnv();
 // Our global context is the window not global
-window.ADZE_ENV = 'dev';
+globalThis.ADZE_ENV = 'dev';
 
 test('renders a custom log', (t) => {
   const style =

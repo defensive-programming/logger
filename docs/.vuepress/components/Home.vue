@@ -190,7 +190,7 @@ export default {
 
   mounted() {
     // Default logs for example
-    const { adze } = window.AdzeLib;
+    const { adze } = globalThis.AdzeLib;
     adze().alert('Example alert log');
     adze().error('Example error log');
     adze().warn('Example warning log');

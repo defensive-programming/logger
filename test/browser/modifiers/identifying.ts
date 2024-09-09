@@ -6,7 +6,7 @@ import adze from '../../../src';
 // Simulate the browser environment for testing
 browserEnv();
 // Our global context is the window not global
-window.ADZE_ENV = 'dev';
+globalThis.ADZE_ENV = 'dev';
 
 test('label prints correctly', (t) => {
   const { render } = adze().label('test').log('This log has a label.');
