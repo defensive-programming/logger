@@ -1,0 +1,39 @@
+{
+  "name": "mono",
+  "version": "0.0.1",
+  "exports": "./src/index.ts",
+  "tasks": {
+    "u": "deno cache --lock-write ./src/index.ts",
+    "dev": "deno run -A --watch --check ./playground.ts",
+    "dev:unlock": "deno run -A --watch --check --frozen=false ./playground.ts",
+    "build": "deno run -A ./script/build-npm.ts",
+    "question": "deno run -A ./script/launch-prerequisite.ts",
+    "release": "deno run -A --allow-read npm:release-it@latest --config release.config.js",
+    "publish": "deno task publish:npm",
+    "launch": "deno task question && deno task release && deno task build && deno task publish",
+    "update-lock": "deno cache --frozen=false ./src/index.ts",
+    "lint": "deno lint",
+    "c:p": "deno cache --frozen=false ./playground.ts",
+    "c:m": "deno cache --frozen=false ./src/index.ts",
+    "d": "deno task dev",
+    "du": "deno task dev:unlock",
+    "b": "deno task build",
+    "r": "deno task release",
+    "p": "deno task publish",
+    "l": "deno task launch"
+  },
+  "imports": {
+    "@deno/dnt": "jsr:@deno/dnt@^0.41.3",
+    "@inquirer/prompts": "npm:@inquirer/prompts@latest",
+    "@types/node": "npm:@types/node@latest",
+    "bug-fucker": "npm:bug-fucker@latest",
+    "bumper": "npm:@release-it/bumper@latest",
+    "chalk": "npm:chalk@latest",
+    "lodash.clonedeep": "npm:lodash.clonedeep@latest",
+    "lodash.defaultsdeep": "npm:lodash.defaultsdeep@latest",
+    "lodash.omit": "npm:lodash.omit@latest",
+    "release-it": "npm:release-it@latest",
+    "~/": "./src/"
+  },
+  "nodeModulesDir": false
+}
