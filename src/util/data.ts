@@ -1,5 +1,5 @@
-import { LogTimestamp } from '../_contracts';
-import { Env } from '../env';
+import type { LogTimestamp } from '../_contracts/index.ts';
+import { Env } from '../env/index.ts';
 import process from 'node:process';
 
 /**

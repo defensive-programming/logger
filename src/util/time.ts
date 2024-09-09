@@ -1,5 +1,5 @@
-import { hrtime } from '../util';
-import { HrTime } from '../_contracts';
+import type { HrTime } from '../_contracts/index.ts';
+import { hrtime } from '../util/index.ts';
 
 /**
  * Takes an HrTime tuple and converts it into a human-readable formatted

@@ -1,3 +1,3 @@
-export * from './Printer';
-export * from './NodePrinter';
-export * from './BrowserPrinter';
+export * from './Printer.ts';
+export * from './NodePrinter.ts';
+export * from './BrowserPrinter.ts';

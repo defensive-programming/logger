@@ -1,7 +1,7 @@
-import * as _chalk from 'chalk';
-import { Defaults, LogLevels, LevelFilter, LogRender, ChalkStyle, Range } from '../_contracts';
-import { isNumber, isArray, isDefined } from './type-guards';
-import { Env } from '../env';
+import { Chalk } from 'chalk';
+import type { Defaults, LogLevels, LevelFilter, LogRender, ChalkStyle, Range } from '../_contracts/index.ts';
+import { isNumber, isArray, isDefined } from './type-guards.ts';
+import { Env } from '../env/index.ts';
 
 /**
  * Capitalizes the first character of the provided string.
@@ -74,7 +74,7 @@ export function createArrayOfNumbers(start: number, end: number): number[] {
  * Render the log. If the ADZE_ENV is set to "dev" the log will not render and
  * will be returned for unit testing purposes.
  */
-export function toConsole(render: LogRender | null): void {
+export function toConsole(render: LogRender | null): void { // @ts-ignore: HACK:
   if (render && Env.global().ADZE_ENV !== 'dev') {
     const [method, args] = render;
     console[method](...args);
@@ -93,7 +93,7 @@ export function applyChalkStyles(
   fidelity: 0 | 1 | 2 | 3 = 1
 ): string {
   // Force chalk colors
-  const chalk = new _chalk.Instance({ level: fidelity });
+  const chalk = new Chalk({ level: fidelity });
   return styles.reduce((acc, style) => {
     return chalk[style](acc);
   }, str);

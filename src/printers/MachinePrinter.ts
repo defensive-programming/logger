@@ -1,5 +1,5 @@
-import { stacktrace as getStacktrace } from '../util';
-import { ConsoleMethod, FinalLogData, LogRender, JsonOutput } from '../_contracts';
+import { stacktrace as getStacktrace } from '../util/index.ts';
+import type { ConsoleMethod, FinalLogData, LogRender, JsonOutput } from '../_contracts/index.ts';
 
 /**
  * This class is responsible for creating a Log Render that is
@@ -9,8 +9,10 @@ export class MachinePrinter {
   /**
    * Finalized log data object.
    */
+  // deno-lint-ignore no-explicit-any
   private data: FinalLogData<any>;
 
+  // deno-lint-ignore no-explicit-any
   constructor(data: FinalLogData<any>) {
     this.data = data;
   }

@@ -1,8 +1,9 @@
-import { SharedPrinter } from './SharedPrinter';
-import { LogRender, FinalLogData } from '../_contracts';
-import { initialCaps } from '../util';
+import { SharedPrinter } from './SharedPrinter.ts';
+import type { LogRender, FinalLogData } from '../_contracts/index.ts';
+import { initialCaps } from '../util/index.ts';
 
 export class BrowserPrinter extends SharedPrinter {
+  // deno-lint-ignore no-explicit-any
   constructor(data: FinalLogData<any>) {
     super(data);
   }

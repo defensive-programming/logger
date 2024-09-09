@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import { Shed } from '../shed/Shed';
+import type { Shed } from '../shed/Shed.ts';
 
 declare global {
   interface globalThis {
@@ -15,7 +15,7 @@ declare global {
 export class Env {
   public readonly global: typeof globalThis;
 
-  public readonly isBrowser: boolean = Env.isBrowser();
+  public readonly isBrowser: boolean;
 
   public _isChrome = false;
 
@@ -25,8 +25,8 @@ export class Env {
 
   constructor() {
     this.global = globalThis;
-
-    if (Env.envIsWindow(this.global)) {
+    this.isBrowser = Env.isBrowser();
+    if (Env.envIsWindow()) {
       this._isChrome = Env.isChrome();
       this._isFirefox = Env.isFirefox();
       this._isSafari = Env.isSafari();
@@ -57,30 +57,24 @@ export class Env {
   /**
    * Static method that returns the environment's global context.
    */
-  public static global(): typeof globalThis {
-    return globalThis;
-  }
+  public static global = (): typeof globalThis => globalThis;
 
   /**
    * Static method that validates the current environment is `Window`.
    */
-  public static isBrowser(): boolean {
-    return typeof window !== 'undefined';
-  }
+  public static isBrowser = (): boolean => typeof window !== 'undefined';
 
   /**
    * TypeGuard to determine if the env value is the Window object.
    */
-  public static envIsWindow = (env: typeof globalThis) => {
-    return Env.isBrowser();
-  };
+  public static envIsWindow = (): boolean => Env.isBrowser();
 
   /**
    * Static method that validates the current environment is Chrome.
    */
   public static isChrome(): boolean {
     const _glbl = Env.global();
-    if (Env.envIsWindow(_glbl)) {
+    if (Env.envIsWindow()) {
       return _glbl.navigator?.userAgent?.indexOf('Chrome') > -1;
     }
     return false;
@@ -91,7 +85,7 @@ export class Env {
    */
   public static isFirefox(): boolean {
     const _glbl = Env.global();
-    if (Env.envIsWindow(_glbl)) {
+    if (Env.envIsWindow()) {
       return _glbl.navigator?.userAgent?.indexOf('Firefox') > -1;
     }
     return false;
@@ -102,7 +96,7 @@ export class Env {
    */
   public static isSafari(): boolean {
     const _glbl = Env.global();
-    if (Env.envIsWindow(_glbl)) {
+    if (Env.envIsWindow()) {
       return _glbl.navigator?.userAgent?.indexOf('Safari') > -1 && !Env.isChrome();
     }
     return false;

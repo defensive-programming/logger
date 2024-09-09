@@ -1,4 +1,4 @@
-import {
+import type {
   Configuration,
   Constraints,
   Defaults,
@@ -10,7 +10,7 @@ import {
   LogData,
   FinalLogData,
   TerminatedLog,
-} from '../_contracts';
+} from '../_contracts/index.ts';
 import {
   isString,
   stacktrace,
@@ -21,12 +21,12 @@ import {
   defaultsDeep,
   cloneDeep,
   captureTimeNow,
-} from '../util';
-import { Label, addLabel, getLabel } from '../label';
-import { defaults } from '../_defaults';
-import { Env } from '../env';
-import { Printer } from '../printers';
-import { allowed, parseFilterLevels } from '../conditions';
+} from '../util/index.ts';
+import { Label, addLabel, getLabel } from '../label/index.ts';
+import { defaults } from '../_defaults/index.ts';
+import { Env } from '../env/index.ts';
+import { Printer } from '../printers/index.ts';
+import { allowed, parseFilterLevels } from '../conditions/index.ts';
 
 export class BaseLog<C extends Constraints> {
   /**
@@ -163,6 +163,7 @@ export class BaseLog<C extends Constraints> {
     const cfg = user_cfg ? (defaultsDeep(user_cfg, defaults) as Defaults) : defaults;
 
     // Now check if global overrides exist and apply them over top of our configuration
+    // @ts-ignore: HACK:
     const shed = env.global.$shed;
     const with_overrides =
       shedExists(shed) && shed.hasOverrides ? (defaultsDeep(shed.overrides, cfg) as Defaults) : cfg;
@@ -493,6 +494,7 @@ export class BaseLog<C extends Constraints> {
    * This is a non-standard API.
    */
   public meta<T>(key: string, val: T): this;
+  // deno-lint-ignore no-explicit-any
   public meta<KV extends [string, any]>(...[key, val]: KV): this;
   public meta(key: string, val: unknown): this {
     return this.modifier((ctxt) => {
@@ -810,7 +812,7 @@ export class BaseLog<C extends Constraints> {
         this._render = new Printer(log_data)[this.printer]();
 
         // Evaluates if this log can print
-        this.printed = allowed(log_data) && this.evalPasses();
+        this.printed = allowed(log_data as FinalLogData<C>) && this.evalPasses();
 
         // Attempt to print the render to the console / terminal
         if (this.printed) {
@@ -821,7 +823,7 @@ export class BaseLog<C extends Constraints> {
         this.store();
 
         // Fire the log listeners
-        this.fireListeners(log_data, this._render, this.printed);
+        this.fireListeners(log_data as FinalLogData<C>, this._render, this.printed);
 
         // Return the terminated log object with a render
         return { log: this, render: this._render, printed: this.printed };
@@ -858,7 +860,7 @@ export class BaseLog<C extends Constraints> {
   /**
    * Stores this log in the Shed if the Shed exists.
    */
-  private store(): void {
+  private store(): void { // @ts-ignore: HACK:
     const shed = this.env.global.$shed;
     if (shedExists(shed)) {
       shed.store(this);
@@ -868,7 +870,7 @@ export class BaseLog<C extends Constraints> {
   /**
    * Fires listeners for this log instance if a Shed exists.
    */
-  private fireListeners(data: FinalLogData<C>, render: LogRender | null, printed: boolean): void {
+  private fireListeners(data: FinalLogData<C>, render: LogRender | null, printed: boolean): void { // @ts-ignore: HACK:
     const shed = this.env.global.$shed;
     if (shedExists(shed)) {
       shed.fireListeners(data, render, printed);

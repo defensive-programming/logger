@@ -1,6 +1,6 @@
-import { LogRender, Collection, LogData, LevelFilter } from '../_contracts';
-import { BaseLog } from '../log';
-import { formatLevels, isString } from '../util';
+import type { LogRender, Collection, LogData, LevelFilter } from '../_contracts/index.ts';
+import type { BaseLog } from '../log/index.ts';
+import { formatLevels, isString } from '../util/index.ts';
 
 /**
  * Filter a collection of logs by the namespace.
@@ -41,6 +41,7 @@ export function filterLevel(collection: Collection = [], levels: LevelFilter): C
  */
 export function filterCollection(
   collection: Collection,
+  // deno-lint-ignore no-explicit-any
   cb: (log: LogData<any>) => boolean
 ): Collection {
   return collection.reduce((acc, log) => {
@@ -53,6 +54,7 @@ export function filterCollection(
  * If the provided log has been previously rendered, this function
  * re-renders it to the console.
  */
+// deno-lint-ignore no-explicit-any
 export function rerender(log: BaseLog<any>): void {
   if (log.render) {
     render(log.render);

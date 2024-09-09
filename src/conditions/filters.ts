@@ -1,11 +1,11 @@
-import {
+import type {
   Defaults,
   FinalLogData,
   GlobalFilter,
   FilterFunction,
   FilterAllowedCallback,
-} from '../_contracts';
-import { formatLevels } from '../util';
+} from '../_contracts/index.ts';
+import { formatLevels } from '../util/index.ts';
 
 // ----- FILTER FORMATTING ----- //
 
@@ -31,6 +31,7 @@ export function parseFilterLevels(cfg: Defaults): Defaults {
  * Validate that the current label set on the log is allowed based on
  * the filter rules.
  */
+// deno-lint-ignore no-explicit-any
 export function labelAllowed(data: FinalLogData<any>): boolean {
   return filterAllowed(data.cfg, 'label', (filter, func) => {
     if (filter === 'include' && data.label.name === null) {
@@ -46,6 +47,7 @@ export function labelAllowed(data: FinalLogData<any>): boolean {
  * Validate that at least one of the current namespaces set on the log
  * is allowed based on the filter rules.
  */
+// deno-lint-ignore no-explicit-any
 export function namespaceAllowed(data: FinalLogData<any>): boolean {
   return filterAllowed(data.cfg, 'namespace', (filter, func) => {
     const filter_ns = data.cfg.filters?.namespace?.[filter] ?? ([] as string[]);

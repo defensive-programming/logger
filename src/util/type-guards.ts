@@ -1,4 +1,4 @@
-import { LogData, FinalLogData, Constraints } from '../_contracts';
+import type { LogData, FinalLogData, Constraints } from '../_contracts/index.ts';
 
 /**
  * Type Guard to check if the given value is a String.

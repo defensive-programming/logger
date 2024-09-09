@@ -1,8 +1,8 @@
-import { LogRender, FinalLogData } from '../_contracts';
-import { Env } from '../env';
-import { BrowserPrinter } from './BrowserPrinter';
-import { NodePrinter } from './NodePrinter';
-import { MachinePrinter } from './MachinePrinter';
+import type { LogRender, FinalLogData } from '../_contracts/index.ts';
+import { Env } from '../env/index.ts';
+import { BrowserPrinter } from './BrowserPrinter.ts';
+import { NodePrinter } from './NodePrinter.ts';
+import { MachinePrinter } from './MachinePrinter.ts';
 
 export type PrinterMethods =
   | 'printLog'
@@ -19,8 +19,10 @@ export class Printer {
 
   private printer: BrowserPrinter | NodePrinter | MachinePrinter;
 
+  // deno-lint-ignore no-explicit-any
   private data: FinalLogData<any>;
 
+  // deno-lint-ignore no-explicit-any
   constructor(data: FinalLogData<any>) {
     this.data = data;
     this.printer = this.resolvePrinter();

@@ -1,11 +1,12 @@
-import { Defaults, FinalLogData, LogLevelDefinition } from '../_contracts';
-import { levelAllowed, labelAllowed, namespaceAllowed } from '.';
-import { Env } from '../env';
-import { getSearchParams } from '../util';
+import type { Defaults, FinalLogData, LogLevelDefinition } from '../_contracts/index.ts';
+import { levelAllowed, labelAllowed, namespaceAllowed } from './index.ts';
+import { Env } from '../env/index.ts';
+import { getSearchParams } from '../util/index.ts';
 
 /**
  * Determine the fate of whether this log will terminate.
  */
+// deno-lint-ignore no-explicit-any
 export function allowed(data: FinalLogData<any>): boolean {
   return (
     levelActive(data.definition, data.cfg.logLevel) &&
@@ -25,6 +26,7 @@ export function levelActive(def: LogLevelDefinition, level: number): boolean {
 /**
  * Validates the log against the configured filters.
  */
+// deno-lint-ignore no-explicit-any
 export function passesFilters(cfg: Defaults, data: FinalLogData<any>): boolean {
   return (
     !(cfg?.filters.hideAll ?? false) &&
@@ -40,11 +42,13 @@ export function passesFilters(cfg: Defaults, data: FinalLogData<any>): boolean {
  */
 export function notTestEnv(): boolean {
   // Allow for URL Param of ADZE_ENV when in the browser.
+  // @ts-ignore: HACK:
   const adze_env = Env.global()?.ADZE_ENV;
   const param = getSearchParams()?.get('ADZE_ENV');
   return (adze_env ?? param ?? '') !== 'test';
 }
 
+// deno-lint-ignore no-explicit-any
 export function notSilent(data: FinalLogData<any>): boolean {
   return data.isSilent === false;
 }

@@ -1,3 +1,3 @@
-export * from './BaseLog';
-export * from './Log';
-export * from './BundledLog';
+export * from './BaseLog.ts';
+export * from './Log.ts';
+export * from './BundledLog.ts';

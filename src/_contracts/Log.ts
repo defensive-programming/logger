@@ -1,5 +1,5 @@
-import { BaseLog } from '../log';
-import { LogLevelDefinition, ConsoleMethod, Defaults, LabelData } from '.';
+import type { BaseLog } from '../log/index.ts';
+import type { LogLevelDefinition, ConsoleMethod, Defaults, LabelData } from './index.ts';
 
 /**
  * The keys of the default terminating log methods included with Adze.

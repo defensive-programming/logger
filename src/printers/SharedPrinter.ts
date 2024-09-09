@@ -1,6 +1,6 @@
-import { FinalLogData } from '../_contracts';
-import { Env } from '../env';
-import { isString } from '../util';
+import type { FinalLogData } from '../_contracts/index.ts';
+import { Env } from '../env/index.ts';
+import { isString } from '../util/index.ts';
 
 export class SharedPrinter {
   protected env: Env = new Env();
@@ -12,8 +12,8 @@ export class SharedPrinter {
   }
 
   get use_emoji(): boolean {
-    return (
-      (this.env.global.$shed?.overrides?.useEmoji === true &&
+    return ( // @ts-ignore: HACK:
+      (this.env.global.$shed?.overrides?.useEmoji === true && // @ts-ignore: HACK:
         !this.env.global.$shed?.overrides?.unstyled === false) ||
       (this.data.cfg.useEmoji === true && this.data.cfg.unstyled === false)
     );

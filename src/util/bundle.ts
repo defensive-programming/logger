@@ -1,7 +1,7 @@
-import { Bundle, Bundler } from '../_contracts';
-import { Printer } from '../printers';
-import { Env } from '../env';
-import { Log, BundledLog } from '../log';
+import type { Bundle, Bundler } from '../_contracts/index.ts';
+import { Printer } from '../printers/index.ts';
+import { Env } from '../env/index.ts';
+import { type Log, BundledLog } from '../log/index.ts';
 
 /**
  * Bundles logs together by wrapping all subsequent logs in a Bundle callback
@@ -18,6 +18,7 @@ import { Log, BundledLog } from '../log';
  * filterAll(log.bundle); // -> reprints all "bundled" logs.
  * ```
  */
+// deno-lint-ignore no-explicit-any
 export function bundle(_log: Log<any> | (() => Log<any>)): Bundler {
   const bundle_arr = [] as Bundle;
   return () => {

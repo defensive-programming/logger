@@ -1,7 +1,7 @@
-import { Env } from '../env';
-import { Printer } from '../printers';
-import { Bundle, Configuration, Constraints } from '../_contracts';
-import { BaseLog } from './BaseLog';
+import type { Env } from '../env/index.ts';
+import type { Printer } from '../printers/index.ts';
+import type { Bundle, Configuration, Constraints } from '../_contracts/index.ts';
+import { BaseLog } from './BaseLog.ts';
 
 export class BundledLog<C extends Constraints> extends BaseLog<C> {
   private _bundle: Bundle;

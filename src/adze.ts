@@ -1,7 +1,7 @@
-import { Configuration, Constraints } from './_contracts';
-import { Log } from './log';
-import { Printer } from './printers';
-import { Env } from './env';
+import type { Configuration, Constraints } from './_contracts/index.ts';
+import { Log } from './log/index.ts';
+import { Printer } from './printers/index.ts';
+import { Env } from './env/index.ts';
 
 /*
  * Planned features:

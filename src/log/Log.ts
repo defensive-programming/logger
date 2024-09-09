@@ -1,7 +1,7 @@
-import { Configuration, Constraints } from '../_contracts';
-import { BaseLog } from './BaseLog';
-import { Env } from '../env';
-import { Printer } from '../printers';
+import type { Configuration, Constraints } from '../_contracts/index.ts';
+import { BaseLog } from './BaseLog.ts';
+import type { Env } from '../env/index.ts';
+import type { Printer } from '../printers/index.ts';
 
 export class Log<C extends Constraints> extends BaseLog<C> {
   constructor(printer: typeof Printer, env: Env, user_cfg?: Configuration) {

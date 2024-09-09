@@ -1,2 +1,2 @@
-export * from './labelFuncs';
-export * from './Label';
+export * from './labelFuncs.ts';
+export * from './Label.ts';

@@ -1,4 +1,4 @@
-import { LevelFilter, Collection } from '../_contracts';
+import type { LevelFilter, Collection } from '../_contracts/index.ts';
 import {
   render,
   rerender,
@@ -6,9 +6,9 @@ import {
   filterLabel,
   filterLevel,
   filterNamespace,
-} from '../filters';
-import { Shed } from '.';
-import { Env } from '../env';
+} from '../filters/index.ts';
+import type { Shed } from './Shed.ts';
+import type { Env } from '../env/index.ts';
 
 /**
  * This class wraps utility functions for use in the global context. These will mostly be
@@ -64,7 +64,7 @@ export class Tools {
    * Shortcut method for rendering a level filtered collection from the Shed cache.
    */
   public renderCache(filter: LevelFilter): Collection {
-    const filtered = this.shed.getCollection(filter);
+    const filtered = this.shed.getCollection(filter); // @ts-ignore: HACK:
     if (this.env.global.ADZE_ENV !== 'dev') {
       filtered.forEach(rerender);
     }
@@ -75,7 +75,7 @@ export class Tools {
    * Shortcut method for rendering a level and namespace filtered collection from the Shed cache.
    */
   public renderNamespace(filter: LevelFilter, ...ns: string[]): Collection {
-    const filtered = this.filterNamespace(this.shed.getCollection(filter), ns);
+    const filtered = this.filterNamespace(this.shed.getCollection(filter), ns); // @ts-ignore: HACK:
     if (this.env.global.ADZE_ENV !== 'dev') {
       filtered.forEach(rerender);
     }
@@ -86,7 +86,7 @@ export class Tools {
    * Shortcut method for rendering a level and label filtered collection from the Shed cache.
    */
   public renderLabel(filter: LevelFilter, label: string): Collection {
-    const filtered = this.filterLabel(this.shed.getCollection(filter), label);
+    const filtered = this.filterLabel(this.shed.getCollection(filter), label); // @ts-ignore: HACK:
     if (this.env.global.ADZE_ENV !== 'dev') {
       filtered.forEach(rerender);
     }

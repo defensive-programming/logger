@@ -1,5 +1,5 @@
-import { hrtime } from '../util';
-import { MetaData, HrTime, LabelData } from '../_contracts';
+import { hrtime } from '../util/index.ts';
+import type { MetaData, HrTime, LabelData } from '../_contracts/index.ts';
 
 export class Label {
   /**

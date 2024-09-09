@@ -1,5 +1,5 @@
-import { Env } from '../env';
-import { Defaults } from '../_contracts';
+import { Env } from '../env/index.ts';
+import type { Defaults } from '../_contracts/index.ts';
 
 export const defaults: Defaults = {
   logLevel: 8,

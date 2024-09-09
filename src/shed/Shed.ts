@@ -1,4 +1,4 @@
-import {
+import type {
   ShedConfig,
   ShedUserConfig,
   Collection,
@@ -11,13 +11,13 @@ import {
   FinalLogData,
   LogRender,
   Configuration,
-} from '../_contracts';
-import { Tools } from './Tools';
-import { BaseLog } from '../log/BaseLog';
-import { Label } from '../label';
-import { shed_defaults } from '../_defaults';
-import { formatLevels, defaultsDeep } from '../util';
-import { Env } from '../env';
+} from '../_contracts/index.ts';
+import { Tools } from './Tools.ts';
+import type { BaseLog } from '../log/BaseLog.ts';
+import type { Label } from '../label/index.ts';
+import { shed_defaults } from '../_defaults/index.ts';
+import { formatLevels, defaultsDeep } from '../util/index.ts';
+import type { Env } from '../env/index.ts';
 
 /**
  * A global store for caching, listening, and recalling Adze logs.
@@ -76,6 +76,7 @@ export class Shed {
   /**
    * Store a log in the Shed.
    */
+  // deno-lint-ignore no-explicit-any
   public store(log: BaseLog<any>): void {
     if (this.cacheSize < this.cfg.cacheLimit) {
       this._cache = this._cache.concat([log]);
@@ -212,6 +213,7 @@ export class Shed {
    * Fires any listeners that are watching the log level defined in the provided log data. The log data
    * and render object will be passed to the listener callback.
    */
+  // deno-lint-ignore no-explicit-any
   public fireListeners(log: FinalLogData<any>, render: LogRender | null, printed: boolean): void {
     this.listeners.get(log.level)?.forEach((listener) => {
       listener(log, render, printed);

@@ -54,4 +54,4 @@ export type ChalkStyle = typeof styles_raw[number];
 /**
  * Immutable array of all possible chalk styles.
  */
-export const chalk_styles = Object.freeze(styles_raw);
+export const chalk_styles: typeof styles_raw = Object.freeze(styles_raw);

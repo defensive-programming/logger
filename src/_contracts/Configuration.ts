@@ -1,5 +1,5 @@
-import { RecursivePartial, ChalkStyle } from '.';
-import { AdzeFilters, UserAdzeFilters } from './Filters';
+import type { RecursivePartial, ChalkStyle } from './index.ts';
+import type { AdzeFilters, UserAdzeFilters } from './Filters.ts';
 
 export type ConsoleMethod =
   | 'error'

@@ -1,6 +1,6 @@
-import { Label } from '../label';
-import { Defaults, Configuration, LogRender, LogData } from '.';
-import { FinalLogData } from './Log';
+import type { Label } from '../label/index.ts';
+import type { Defaults, Configuration, LogRender, LogData } from './index.ts';
+import type { FinalLogData } from './Log.ts';
 
 export type LabelMap = Map<string, Label>;
 
@@ -11,6 +11,7 @@ export type ListenerBuckets = Map<number, ListenerBucket>;
 export type ListenerBucket = Map<number, ListenerCallback>;
 
 export type ListenerCallback = (
+  // deno-lint-ignore no-explicit-any
   LogData: LogData<any> | FinalLogData<any>,
   render: LogRender | null,
   printed: boolean
