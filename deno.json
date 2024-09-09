@@ -1,6 +1,6 @@
 {
   "name": "mono",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "exports": "./src/index.ts",
   "tasks": {
     "u": "deno cache --lock-write ./src/index.ts",
