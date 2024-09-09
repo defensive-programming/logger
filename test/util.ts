@@ -1,7 +1,7 @@
 import test from 'ava';
 import { leadingZeros, hrtime } from '../src/util';
 
-global.ADZE_ENV = 'dev';
+globalThis.ADZE_ENV = 'dev';
 
 test('properly pads a number with leading zeros', (t) => {
   const result = leadingZeros(5, 65);

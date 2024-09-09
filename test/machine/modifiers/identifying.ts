@@ -1,7 +1,7 @@
 import test from 'ava';
 import adze, { JsonOutput } from '../../../src';
 
-global.ADZE_ENV = 'dev';
+globalThis.ADZE_ENV = 'dev';
 
 test('label prints correctly', (t) => {
   const { log, render } = adze({ machineReadable: true })

@@ -2,7 +2,7 @@
 import test from 'ava';
 import adze, { createShed, removeShed } from '../../src';
 
-global.ADZE_ENV = 'dev';
+globalThis.ADZE_ENV = 'dev';
 
 test.beforeEach(() => {
   createShed();

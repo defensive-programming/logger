@@ -2,17 +2,10 @@
 import { Shed } from '../shed/Shed';
 
 declare global {
-  interface Window {
+  interface globalThis {
     $shed?: Shed;
     ADZE_ENV?: 'test' | 'dev';
-    ADZE_ENV_CONTEXT?: 'global' | 'window';
-  }
-  namespace NodeJS {
-    export interface Global {
-      $shed?: Shed;
-      ADZE_ENV?: 'test' | 'dev';
-      ADZE_ENV_CONTEXT?: 'global' | 'window';
-    }
+    ADZE_ENV_CONTEXT?: 'globalThis' | 'window';
   }
 }
 
@@ -20,7 +13,7 @@ declare global {
  * Class with various properties describing the current environment.
  */
 export class Env {
-  public readonly global: Window | NodeJS.Global;
+  public readonly global: typeof globalThis;
 
   public readonly isBrowser: boolean = Env.isBrowser();
 
@@ -31,7 +24,7 @@ export class Env {
   public _isSafari = false;
 
   constructor() {
-    this.global = Env.global();
+    this.global = globalThis;
 
     if (Env.envIsWindow(this.global)) {
       this._isChrome = Env.isChrome();
@@ -64,8 +57,8 @@ export class Env {
   /**
    * Static method that returns the environment's global context.
    */
-  public static global(): Window | NodeJS.Global {
-    return Env.isBrowser() ? window : global;
+  public static global(): typeof globalThis {
+    return globalThis;
   }
 
   /**
@@ -78,7 +71,7 @@ export class Env {
   /**
    * TypeGuard to determine if the env value is the Window object.
    */
-  public static envIsWindow = (env: Window | NodeJS.Global): env is Window => {
+  public static envIsWindow = (env: typeof globalThis) => {
     return Env.isBrowser();
   };
 

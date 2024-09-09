@@ -1,7 +1,7 @@
 import test from 'ava';
 import adze from '../../src';
 
-global.ADZE_ENV = 'dev';
+globalThis.ADZE_ENV = 'dev';
 
 test('dir log terminates properly', (t) => {
   const { log, render } = adze({ machineReadable: true }).dir.info({ a: 1234, b: 5678 });

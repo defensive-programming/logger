@@ -1,7 +1,7 @@
 import test from 'ava';
 import adze, { JsonOutput } from '../../../src';
 
-global.ADZE_ENV = 'dev';
+globalThis.ADZE_ENV = 'dev';
 
 test('group log renders correctly', (t) => {
   const { log, render } = adze({ machineReadable: true }).group.success('Opening a log group.');

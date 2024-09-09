@@ -2,7 +2,7 @@ import test from 'ava';
 import adze, { defaults } from '../../../src';
 import { applyChalkStyles } from '../../../src/util';
 
-global.ADZE_ENV = 'dev';
+globalThis.ADZE_ENV = 'dev';
 
 test('group log renders correctly', (t) => {
   const { log, render } = adze().group.success('Opening a log group.');

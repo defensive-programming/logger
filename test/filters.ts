@@ -1,7 +1,7 @@
 import test from 'ava';
 import adze, { bundle, filterNamespace, filterLabel, filterLevel, filterCollection } from '../src';
 
-global.ADZE_ENV = 'dev';
+globalThis.ADZE_ENV = 'dev';
 
 test('filters a log collection by namespace', (t) => {
   const bundled = bundle(adze({ useEmoji: true }));

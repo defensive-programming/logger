@@ -1,7 +1,7 @@
 import test from 'ava';
 import adze from '../../../src';
 
-global.ADZE_ENV = 'dev';
+globalThis.ADZE_ENV = 'dev';
 
 test('label prints correctly', (t) => {
   const { render } = adze().label('test').log('This log has a label.');

@@ -2,7 +2,7 @@ import test from 'ava';
 import adze, { ChalkStyle } from '../../src';
 import { applyChalkStyles } from '../../src/util';
 
-global.ADZE_ENV = 'dev';
+globalThis.ADZE_ENV = 'dev';
 
 test('renders a custom log', (t) => {
   const style =

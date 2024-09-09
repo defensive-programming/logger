@@ -1,7 +1,7 @@
 import test from 'ava';
 import adze from '../../src';
 
-global.ADZE_ENV = 'dev';
+globalThis.ADZE_ENV = 'dev';
 
 // ------- Default Browser Logs -------- //
 test('renders a default alert log', (t) => {

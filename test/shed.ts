@@ -3,7 +3,7 @@ import { Shed } from '../src/shed/Shed';
 import adze, { createShed, removeShed, shedExists, isFinalLogData } from '../src';
 import { Label } from '../src/label';
 
-global.ADZE_ENV = 'dev';
+globalThis.ADZE_ENV = 'dev';
 
 // Setup our test hook context
 const test = anyTest as TestInterface<{ shed: Shed }>;
@@ -14,14 +14,14 @@ test.afterEach(() => {
 
 test('createShed adds a shed instance to the global context', (t) => {
   createShed();
-  t.truthy(global.$shed);
+  t.truthy(globalThis.$shed);
 });
 
 test('removeShed removes the shed instance from the global context', (t) => {
   createShed();
-  t.truthy(global.$shed);
+  t.truthy(globalThis.$shed);
   removeShed();
-  t.falsy(global.$shed);
+  t.falsy(globalThis.$shed);
 });
 
 test('shedExists correctly indicates that a shed instance exists in the global context', (t) => {

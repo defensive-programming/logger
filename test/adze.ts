@@ -3,7 +3,7 @@ import { passesFilters } from '../src/conditions';
 import adze, { defaults, isFinalLogData } from '../src';
 import { Defaults, LogLevelDefinition } from '../src/_contracts';
 
-global.ADZE_ENV = 'dev';
+globalThis.ADZE_ENV = 'dev';
 
 test('create a new logger with defaults', (t) => {
   const log = adze();
@@ -49,12 +49,12 @@ test('prevents log from printing when the log level is lowered', (t) => {
 });
 
 test('prevents log from printing when in a test environment', (t) => {
-  global.ADZE_ENV = 'test';
+  globalThis.ADZE_ENV = 'test';
   const terminated = adze().log('testing');
   t.truthy(terminated.log);
   t.truthy(terminated.render);
   t.falsy(terminated.printed);
-  global.ADZE_ENV = 'dev';
+  globalThis.ADZE_ENV = 'dev';
 });
 
 test('passesFilters correctly indicates that a log is allowed to print', (t) => {
