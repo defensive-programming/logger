@@ -1,5 +1,6 @@
 import { LogTimestamp } from '../_contracts';
 import { Env } from '../env';
+import process from 'node:process';
 
 /**
  * Generate a timestamp object for your log.
