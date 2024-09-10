@@ -70,10 +70,10 @@ export function stacktrace(): string | null {
 /**
  * Gets a URLSearchParams object of the current URL.
  */
-export function getSearchParams(): URLSearchParams | undefined {
+export function getSearchParams() {
   const env = new Env();
   const ctxt = env.global;
-  if (Env.envIsWindow(ctxt)) {
+  if (Env.isBrowser()) {
     return new URLSearchParams(ctxt.document.location.search.substring(1));
   }
 }
@@ -81,7 +81,7 @@ export function getSearchParams(): URLSearchParams | undefined {
 export function hrtime(prev?: [number, number]): [number, number] {
   const env = new Env();
   const ctxt = env.global;
-  if (Env.envIsWindow(ctxt)) {
+  if (Env.isBrowser()) {
     return hrtimeBrowser(ctxt, prev);
   } else {
     return process?.hrtime(prev);

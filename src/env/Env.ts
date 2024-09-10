@@ -1,14 +1,3 @@
-/* eslint-disable @typescript-eslint/no-namespace */
-import type { Shed } from '../shed/Shed.ts';
-
-declare global {
-  interface globalThis {
-    $shed?: Shed;
-    ADZE_ENV?: 'test' | 'dev';
-    ADZE_ENV_CONTEXT?: 'globalThis';
-  }
-}
-
 /**
  * Class with various properties describing the current environment.
  */
@@ -26,7 +15,7 @@ export class Env {
   constructor() {
     this.global = globalThis;
     this.isBrowser = Env.isBrowser();
-    if (Env.envIsWindow()) {
+    if (Env.isBrowser()) {
       this._isChrome = Env.isChrome();
       this._isFirefox = Env.isFirefox();
       this._isSafari = Env.isSafari();
@@ -55,27 +44,16 @@ export class Env {
   }
 
   /**
-   * Static method that returns the environment's global context.
-   */
-  public static global = (): typeof globalThis => globalThis;
-
-  /**
    * Static method that validates the current environment is `Window`.
    */
   public static isBrowser = (): boolean => typeof window !== 'undefined';
 
   /**
-   * TypeGuard to determine if the env value is the Window object.
-   */
-  public static envIsWindow = (): boolean => Env.isBrowser();
-
-  /**
    * Static method that validates the current environment is Chrome.
    */
   public static isChrome(): boolean {
-    const _glbl = Env.global();
-    if (Env.envIsWindow()) {
-      return _glbl.navigator?.userAgent?.indexOf('Chrome') > -1;
+    if (Env.isBrowser()) {
+      return navigator?.userAgent?.indexOf('Chrome') > -1;
     }
     return false;
   }
@@ -84,9 +62,8 @@ export class Env {
    * Static method that validates the current environment is Firefox.
    */
   public static isFirefox(): boolean {
-    const _glbl = Env.global();
-    if (Env.envIsWindow()) {
-      return _glbl.navigator?.userAgent?.indexOf('Firefox') > -1;
+    if (Env.isBrowser()) {
+      return navigator?.userAgent?.indexOf('Firefox') > -1;
     }
     return false;
   }
@@ -95,9 +72,8 @@ export class Env {
    * Static method that validates the current environment is Safari.
    */
   public static isSafari(): boolean {
-    const _glbl = Env.global();
-    if (Env.envIsWindow()) {
-      return _glbl.navigator?.userAgent?.indexOf('Safari') > -1 && !Env.isChrome();
+    if (Env.isBrowser()) {
+      return navigator?.userAgent?.indexOf('Safari') > -1 && !Env.isChrome();
     }
     return false;
   }

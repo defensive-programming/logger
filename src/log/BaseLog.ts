@@ -163,7 +163,6 @@ export class BaseLog<C extends Constraints> {
     const cfg = user_cfg ? (defaultsDeep(user_cfg, defaults) as Defaults) : defaults;
 
     // Now check if global overrides exist and apply them over top of our configuration
-    // @ts-ignore: HACK:
     const shed = env.global.$shed;
     const with_overrides =
       shedExists(shed) && shed.hasOverrides ? (defaultsDeep(shed.overrides, cfg) as Defaults) : cfg;
@@ -860,7 +859,7 @@ export class BaseLog<C extends Constraints> {
   /**
    * Stores this log in the Shed if the Shed exists.
    */
-  private store(): void { // @ts-ignore: HACK:
+  private store(): void {
     const shed = this.env.global.$shed;
     if (shedExists(shed)) {
       shed.store(this);
@@ -870,7 +869,7 @@ export class BaseLog<C extends Constraints> {
   /**
    * Fires listeners for this log instance if a Shed exists.
    */
-  private fireListeners(data: FinalLogData<C>, render: LogRender | null, printed: boolean): void { // @ts-ignore: HACK:
+  private fireListeners(data: FinalLogData<C>, render: LogRender | null, printed: boolean): void {
     const shed = this.env.global.$shed;
     if (shedExists(shed)) {
       shed.fireListeners(data, render, printed);

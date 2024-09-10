@@ -76,10 +76,11 @@ export function namespaceAllowed(data: FinalLogData<any>): boolean {
  * Validate that the current level set on the log is allowed based on
  * the filter rules.
  */
+// deno-lint-ignore no-explicit-any
 export function levelAllowed(data: FinalLogData<any>): boolean {
   const { include = [], exclude = [] } = data.cfg?.filters?.level ?? {};
   if (include.length > 0) return include.indexOf(data.level) !== -1;
-  if (exclude?.indexOf(data.level) === -1) return true; // @ts-ignore HACK:
+  if (exclude?.indexOf(data.level) === -1) return true;
   return globalThis.$shed?.getConfig().shouldUseStrictExclude ? false : data.isOutstand;
 }
 

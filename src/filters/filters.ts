@@ -65,5 +65,5 @@ export function rerender(log: BaseLog<any>): void {
  * Render a log to the console based on a log render object.
  */
 export function render([method, args]: LogRender): void {
-  console[method](...args);
+  console[method](...(args as unknown[]));
 }

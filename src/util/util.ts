@@ -74,10 +74,10 @@ export function createArrayOfNumbers(start: number, end: number): number[] {
  * Render the log. If the ADZE_ENV is set to "dev" the log will not render and
  * will be returned for unit testing purposes.
  */
-export function toConsole(render: LogRender | null): void { // @ts-ignore: HACK:
-  if (render && Env.global().ADZE_ENV !== 'dev') {
+export function toConsole(render: LogRender | null): void {
+  if (render && globalThis.ADZE_ENV !== 'dev') {
     const [method, args] = render;
-    console[method](...args);
+    console[method](...(args as unknown[]));
   }
 }
 
