@@ -19,7 +19,7 @@
 
 
   "scripts": {
-    "publish:npm": "npm publish --access npm/",
+    "publish:npm": "npm publish --access public npm/",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
 
