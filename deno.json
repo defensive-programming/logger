@@ -1,6 +1,6 @@
 {
   "name": "@defensive-programming/logger",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "exports": "./src/index.ts",
   "tasks": {
     "u": "deno cache --lock-write ./src/index.ts",
