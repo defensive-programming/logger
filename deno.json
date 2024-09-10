@@ -1,5 +1,5 @@
 {
-  "name": "@defensive/logger",
+  "name": "@defensive-programming/logger",
   "version": "0.0.2",
   "exports": "./src/index.ts",
   "tasks": {
