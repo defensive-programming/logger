@@ -25,6 +25,7 @@
       "npm:@inquirer/prompts@latest": "npm:@inquirer/prompts@5.5.0",
       "npm:@release-it/bumper@latest": "npm:@release-it/bumper@6.0.1_release-it@17.6.0__typescript@4.9.5_typescript@4.9.5",
       "npm:@types/jsdom@^16.2.3": "npm:@types/jsdom@16.2.15",
+      "npm:@types/node": "npm:@types/node@18.16.19",
       "npm:@types/node@latest": "npm:@types/node@22.5.4",
       "npm:ava@^3.15.0": "npm:ava@3.15.0",
       "npm:browser-env@^3.3.0": "npm:browser-env@3.3.0",
