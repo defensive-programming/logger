@@ -11,6 +11,7 @@ build
 .dev
 node_modules/
 *.tgz
+npm/
 
 # IDE
 .idea
