@@ -16,7 +16,8 @@ import { Tools } from './Tools.ts';
 import type { BaseLog } from '../log/BaseLog.ts';
 import type { Label } from '../label/index.ts';
 import { shed_defaults } from '../_defaults/index.ts';
-import { formatLevels, defaultsDeep } from '../util/index.ts';
+import { formatLevels } from '../util/index.ts';
+import defaultsDeep from 'lodash.defaultsdeep';
 import type { Env } from '../env/index.ts';
 
 /**

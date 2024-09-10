@@ -1,3 +1,8 @@
+/// <reference types="./global.d.ts" />
+/// <reference types="@types/lodash" />
+/// <reference types="@types/node" />
+/// <reference types="@types/lodash.defaultsdeep" />
+
 import { adze } from './adze.ts';
 export { adze };
 export default adze;

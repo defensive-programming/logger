@@ -26,21 +26,28 @@
   },
   "imports": {
     "@deno/dnt": "jsr:@deno/dnt@^0.41.3",
+    "@es-toolkit/es-toolkit": "jsr:@es-toolkit/es-toolkit@^1.17.0",
     "@inquirer/prompts": "npm:@inquirer/prompts@latest",
+    "@types/lodash": "npm:@types/lodash@^4.17.7",
+    "@types/lodash.defaultsdeep": "npm:@types/lodash.defaultsdeep@^4.6.9",
     "@types/node": "npm:@types/node@latest",
     "bug-fucker": "npm:bug-fucker@latest",
     "bumper": "npm:@release-it/bumper@latest",
     "chalk": "npm:chalk@latest",
-    "lodash.clonedeep": "npm:lodash.clonedeep@latest",
-    "lodash.defaultsdeep": "npm:lodash.defaultsdeep@latest",
-    "lodash.omit": "npm:lodash.omit@latest",
+    "lodash": "npm:lodash@^4.17.21",
+    "lodash.defaultsdeep": "npm:lodash.defaultsdeep@^4.6.1",
     "release-it": "npm:release-it@latest",
     "~/": "./src/"
   },
   "nodeModulesDir": false,
   "compilerOptions": {
     "checkJs": true,
-    "lib": ["dom", "deno.ns", "deno.worker", "dom.asynciterable", "dom.iterable"],
-    "types": ["./src/global.d.ts"]
+    "lib": [
+      "dom",
+      "deno.ns",
+      "deno.worker",
+      "dom.asynciterable",
+      "dom.iterable"
+    ]
   }
 }

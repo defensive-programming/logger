@@ -1,3 +1,4 @@
+import defaultsDeep from 'lodash.defaultsdeep';
 import type {
   Configuration,
   Constraints,
@@ -18,10 +19,9 @@ import {
   toConsole,
   isFinalLogData,
   shedExists,
-  defaultsDeep,
-  cloneDeep,
   captureTimeNow,
 } from '../util/index.ts';
+import { cloneDeep } from '@es-toolkit/es-toolkit';
 import { Label, addLabel, getLabel } from '../label/index.ts';
 import { defaults } from '../_defaults/index.ts';
 import { Env } from '../env/index.ts';

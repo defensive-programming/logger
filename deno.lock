@@ -6,6 +6,7 @@
       "jsr:@deno/cache-dir@^0.10.3": "jsr:@deno/cache-dir@0.10.3",
       "jsr:@deno/dnt@^0.41.3": "jsr:@deno/dnt@0.41.3",
       "jsr:@deno/graph@^0.73.1": "jsr:@deno/graph@0.73.1",
+      "jsr:@es-toolkit/es-toolkit@^1.17.0": "jsr:@es-toolkit/es-toolkit@1.17.0",
       "jsr:@std/assert@^0.223.0": "jsr:@std/assert@0.223.0",
       "jsr:@std/assert@^0.226.0": "jsr:@std/assert@0.226.0",
       "jsr:@std/bytes@^0.223.0": "jsr:@std/bytes@0.223.0",
@@ -26,6 +27,8 @@
       "npm:@inquirer/prompts@latest": "npm:@inquirer/prompts@5.5.0",
       "npm:@release-it/bumper@latest": "npm:@release-it/bumper@6.0.1_release-it@17.6.0__typescript@4.9.5_typescript@4.9.5",
       "npm:@types/jsdom@^16.2.3": "npm:@types/jsdom@16.2.15",
+      "npm:@types/lodash.defaultsdeep@^4.6.9": "npm:@types/lodash.defaultsdeep@4.6.9",
+      "npm:@types/lodash@^4.17.7": "npm:@types/lodash@4.17.7",
       "npm:@types/node": "npm:@types/node@18.16.19",
       "npm:@types/node@latest": "npm:@types/node@22.5.4",
       "npm:ava@^3.15.0": "npm:ava@3.15.0",
@@ -36,8 +39,8 @@
       "npm:http-server@^0.11.1": "npm:http-server@0.11.2",
       "npm:jsdom@^16.3.0": "npm:jsdom@16.7.0",
       "npm:lodash.clonedeep@latest": "npm:lodash.clonedeep@4.5.0",
-      "npm:lodash.defaultsdeep@latest": "npm:lodash.defaultsdeep@4.6.1",
-      "npm:lodash.omit@latest": "npm:lodash.omit@4.5.0",
+      "npm:lodash.defaultsdeep@^4.6.1": "npm:lodash.defaultsdeep@4.6.1",
+      "npm:lodash@^4.17.21": "npm:lodash@4.17.21",
       "npm:parcel-bundler@^1.12.5": "npm:parcel-bundler@1.12.5_@babel+core@7.25.2",
       "npm:prettier@2.2.1": "npm:prettier@2.2.1",
       "npm:release-it@latest": "npm:release-it@17.6.0_typescript@4.9.5",
@@ -73,6 +76,9 @@
       },
       "@deno/graph@0.73.1": {
         "integrity": "cd69639d2709d479037d5ce191a422eabe8d71bb68b0098344f6b07411c84d41"
+      },
+      "@es-toolkit/es-toolkit@1.17.0": {
+        "integrity": "dfbefedc4c821c97dbbfe33a716b4b34d486f2c214dce3b7c3f8161344d2e72a"
       },
       "@std/assert@0.223.0": {
         "integrity": "eb8d6d879d76e1cc431205bd346ed4d88dc051c6366365b1af47034b0670be24"
@@ -1598,6 +1604,16 @@
       },
       "@types/linkify-it@5.0.0": {
         "integrity": "sha512-sVDA58zAw4eWAffKOaQH5/5j3XeayukzDk+ewSsnv3p4yJEZHCCzMDiZM8e0OUrRvmpGZ85jf4yDHkHsgBNr9Q==",
+        "dependencies": {}
+      },
+      "@types/lodash.defaultsdeep@4.6.9": {
+        "integrity": "sha512-pLtCFK0YkHfGtGLYLNMTbFB5/G5+RsmQCIbbHH8GOAXjv+gDkVilY98kILfe8JH2Kev0OCReYxp1AjxEjP8ixA==",
+        "dependencies": {
+          "@types/lodash": "@types/lodash@4.17.7"
+        }
+      },
+      "@types/lodash@4.17.7": {
+        "integrity": "sha512-8wTvZawATi/lsmNu10/j2hk1KEP0IvjubqPE3cu1Xz7xfXXt5oCq3SNUz4fMIP4XGF9Ky+Ue2tBA3hcS7LSBlA==",
         "dependencies": {}
       },
       "@types/markdown-it@10.0.3": {
@@ -6960,10 +6976,6 @@
         "integrity": "sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==",
         "dependencies": {}
       },
-      "lodash.omit@4.5.0": {
-        "integrity": "sha512-XeqSp49hNGmlkj2EJlfrQFIzQ6lXdNro9sddtQzcJY8QaoC2GO0DT7xaIokHeyM+mIT0mPMlPvkYzg2xCuHdZg==",
-        "dependencies": {}
-      },
       "lodash.sortby@4.7.0": {
         "integrity": "sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==",
         "dependencies": {}
@@ -11378,14 +11390,16 @@
   "workspace": {
     "dependencies": [
       "jsr:@deno/dnt@^0.41.3",
+      "jsr:@es-toolkit/es-toolkit@^1.17.0",
       "npm:@inquirer/prompts@latest",
       "npm:@release-it/bumper@latest",
+      "npm:@types/lodash.defaultsdeep@^4.6.9",
+      "npm:@types/lodash@^4.17.7",
       "npm:@types/node@latest",
       "npm:bug-fucker@latest",
       "npm:chalk@latest",
-      "npm:lodash.clonedeep@latest",
-      "npm:lodash.defaultsdeep@latest",
-      "npm:lodash.omit@latest",
+      "npm:lodash.defaultsdeep@^4.6.1",
+      "npm:lodash@^4.17.21",
       "npm:release-it@latest"
     ],
     "packageJson": {

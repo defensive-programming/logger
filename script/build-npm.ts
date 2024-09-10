@@ -1,7 +1,7 @@
 import * as dnt from "@deno/dnt";
 import denoJSON from './../deno.json' with { type: "json" };
 import packageJSON from './../package.json' with { type: "json" };
-import omit from 'lodash.omit';
+import * as U from '@es-toolkit/es-toolkit';
 import { exists } from "https://deno.land/std/fs/mod.ts";
 
 const removeNodeModulesFolderIfExists = async () => {
@@ -13,23 +13,21 @@ const removeNodeModulesFolderIfExists = async () => {
 const metadata = {
   name: denoJSON.name,
   version: denoJSON.version,
-  ...omit(packageJSON, ['scripts', 'devDependencies'])
+  ...U.omit(packageJSON, ['scripts', 'devDependencies'])
 }
 
 await dnt.emptyDir("./npm");
 
 await dnt.build({
   test: false, // @20240830
-  typeCheck: false,
   entryPoints: ["./src/index.ts"],
   outDir: "./npm",
   shims: {
-    deno: true,
+    deno: true, // so if you've used Deno-specific APIs, they will be transformed into Node.js APIs during the build
   }, // @ts-ignore: HACK:
-  // compilerOptions: {
-  //   ...denoJSON.compilerOptions,
-  //   lib: ['DOM.Iterable', 'DOM']
-  // },
+  compilerOptions: {
+    lib: ['DOM.Iterable', 'DOM']
+  },
   importMap: "./deno.json", // https://github.com/denoland/dnt/issues/260
   package: metadata,
   postBuild() {
