@@ -2,6 +2,13 @@ import * as dnt from "@deno/dnt";
 import denoJSON from './../deno.json' with { type: "json" };
 import packageJSON from './../package.json' with { type: "json" };
 import omit from 'lodash.omit';
+import { exists } from "https://deno.land/std/fs/mod.ts";
+
+const removeNodeModulesFolderIfExists = async () => {
+  if (await exists("node_modules")) {
+    await Deno.remove("node_modules", { recursive: true });
+  }
+}
 
 const metadata = {
   name: denoJSON.name,
@@ -13,11 +20,16 @@ await dnt.emptyDir("./npm");
 
 await dnt.build({
   test: false, // @20240830
+  typeCheck: false,
   entryPoints: ["./src/index.ts"],
   outDir: "./npm",
   shims: {
     deno: true,
-  },
+  }, // @ts-ignore: HACK:
+  // compilerOptions: {
+  //   ...denoJSON.compilerOptions,
+  //   lib: ['DOM.Iterable', 'DOM']
+  // },
   importMap: "./deno.json", // https://github.com/denoland/dnt/issues/260
   package: metadata,
   postBuild() {
@@ -47,12 +59,6 @@ await dnt.build({
      * (https://github.com/denoland/deno/issues/17930)
      * and there's an option that can force that to be generated, which has been used in deno.json: `nodeModulesDir`
      */
-    removeNodeModulesFolderIfExists()
+    return removeNodeModulesFolderIfExists(); // Return the promise
   },
 });
-
-const removeNodeModulesFolderIfExists = () =>
-{
-  const stat = Deno.statSync("node_modules");
-  stat.isDirectory && Deno.removeSync("node_modules", { recursive: true });
-}
