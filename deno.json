@@ -1,5 +1,5 @@
 {
-  "name": "mono",
+  "name": "@defensive/logger",
   "version": "0.0.2",
   "exports": "./src/index.ts",
   "tasks": {
